@@ -14,6 +14,10 @@ class Users {
     String? email;
     String? password;
     String? gender;
+    String? hn;
+    String? age;
+    String? symptom;
+    String? disease;
 
     Users({
         this.id,
@@ -21,6 +25,10 @@ class Users {
         this.email,
         this.password,
         this.gender,
+        this.hn,
+        this.age,
+        this.symptom,
+        this.disease,
     });
 
     factory Users.fromJson(Map<String, dynamic> json) => Users(
@@ -29,6 +37,10 @@ class Users {
         email: json["email"],
         password: json["password"],
         gender: json["gender"],
+        hn: json["HN"],
+        age: json["age"],
+        symptom: json["symptom"],
+        disease: json["disease"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,5 +49,9 @@ class Users {
         "email": email,
         "password": password,
         "gender": gender,
+        "HN": hn,
+        "age": age,
+        "symptom": symptom,
+        "disease": disease,
     };
 }

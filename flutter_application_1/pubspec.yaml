@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '3.0.5'
 
 dependencies:
   
@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.1.0
+  
 
 dev_dependencies:
   flutter_test:

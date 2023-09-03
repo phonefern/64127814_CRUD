@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Screen/UserForm.dart';
 import 'package:flutter_application_1/Screen/UserInfo.dart';
-import 'package:flutter_application_1/Screen/home.dart';
 import 'package:flutter_application_1/Screen/login.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/models/Users.dart';
 import 'package:flutter_application_1/models/config.dart';
 import 'package:http/http.dart' as http;
@@ -64,11 +64,22 @@ class _welcomeState extends State<welcome> {
         return Dismissible(
           key: UniqueKey(),
           direction: DismissDirection.endToStart,
-          // ignore: sort_child_properties_last
+          onDismissed: (direction) {
+            removeUsers(user);
+          },
+          background: Container(
+            color: Colors.red,
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            alignment: Alignment.centerRight,
+            child: Icon(Icons.delete, color: Colors.white),
+            
+          ),
+          
+          
           child: Card(
             child: ListTile(
               title: Text("${user.fullname}"),
-              subtitle: Text("${user.email}"),
+              subtitle: Text("HN: ${user.hn}"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -90,15 +101,6 @@ class _welcomeState extends State<welcome> {
                 icon: Icon(Icons.edit),
               ),
             ),
-          ),
-          onDismissed: (direction) {
-            removeUsers(user);
-          },
-          background: Container(
-            color: Colors.red,
-            margin: EdgeInsets.symmetric(horizontal: 15),
-            alignment: Alignment.centerRight,
-            child: Icon(Icons.delete, color: Colors.white),
           ),
         );
       },
@@ -169,7 +171,7 @@ class Sidemenu extends StatelessWidget {
           title: Text("logout"),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return HomeScreen();
+              return start();
             }));
           },
         )

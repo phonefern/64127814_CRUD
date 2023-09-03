@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/Users.dart';
 import 'package:flutter_application_1/models/config.dart';
@@ -76,13 +75,24 @@ class _RegisterscreenState extends State<Registerscreen> {
                       topRight: Radius.circular(40),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
-                    child: Form(
-                        key: _formkey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
+                  child: Stack(children: [
+                    Positioned(
+                      top: 20,
+                      left: 20,
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back_rounded),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                      child: Form(
+                          key: _formkey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
                               const Text(
                                 'Create new',
                                 style: TextStyle(
@@ -101,7 +111,9 @@ class _RegisterscreenState extends State<Registerscreen> {
                                   fontSize: 44,
                                 ),
                               ),
-                              const SizedBox(height: 10.0,),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
                               const Text(
                                 'Already registered? Log in here',
                                 style: TextStyle(
@@ -110,19 +122,30 @@ class _RegisterscreenState extends State<Registerscreen> {
                                   fontSize: 15,
                                 ),
                               ),
-                            const SizedBox(height: 30.0,),
-                            fnameInputField(),
-                            const SizedBox(height: 30.0,),
-                            emailInputField(),
-                             const SizedBox(height: 30.0,),
-                            passwordInputField(),
-                             const SizedBox(height: 30.0,),
-                            checkPassword(),
-                            const SizedBox(height: 30.0,),
-                            SubmitButton(),
-                          ],
-                        )),
-                  )))
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              fnameInputField(),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              emailInputField(),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              passwordInputField(),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              checkPassword(),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              SubmitButton(),
+                            ],
+                          )),
+                    )
+                  ])))
         ]));
   }
 
@@ -130,14 +153,13 @@ class _RegisterscreenState extends State<Registerscreen> {
     return TextFormField(
       initialValue: user.fullname,
       decoration: InputDecoration(
-        fillColor: Color.fromARGB(255, 230, 224, 224),
-        filled: true,
-          labelText: 'Name',
+          fillColor: Color.fromARGB(255, 230, 224, 224),
+          filled: true,
+          labelText: "Name",
           hintText: "ใส่ชื่อที่นี่",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-          )
-          ),
+          )),
       validator: (value) {
         if (value!.isEmpty) {
           return "กรุณาใส่ชื่อ";
@@ -152,15 +174,14 @@ class _RegisterscreenState extends State<Registerscreen> {
   Widget emailInputField() {
     return TextFormField(
       initialValue: user.email,
-       decoration: InputDecoration(
-        fillColor: Color.fromARGB(255, 230, 224, 224),
-        filled: true,
+      decoration: InputDecoration(
+          fillColor: Color.fromARGB(255, 230, 224, 224),
+          filled: true,
           labelText: 'Email',
           hintText: "ใส่อีเมลที่นี่",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-          )
-          ),
+          )),
       validator: (value) {
         if (value!.isEmpty) {
           return "กรุณาป้อนอีเมล";
@@ -180,15 +201,14 @@ class _RegisterscreenState extends State<Registerscreen> {
     return TextFormField(
       initialValue: user.password,
       obscureText: true,
-      decoration:  InputDecoration(
-        fillColor: Color.fromARGB(255, 230, 224, 224),
-        filled: true,
+      decoration: InputDecoration(
+          fillColor: Color.fromARGB(255, 230, 224, 224),
+          filled: true,
           labelText: 'Password',
           hintText: "ใส่รหัสผ่านที่นี่",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-          )
-          ),
+          )),
       validator: (value) {
         if (value!.isEmpty) {
           return "กรุณาป้อนรหัสผ่าน";
@@ -203,15 +223,14 @@ class _RegisterscreenState extends State<Registerscreen> {
   Widget checkPassword() {
     return TextFormField(
       obscureText: true,
-      decoration:  InputDecoration(
-        fillColor: Color.fromARGB(255, 230, 224, 224),
-        filled: true,
+      decoration: InputDecoration(
+          fillColor: Color.fromARGB(255, 230, 224, 224),
+          filled: true,
           labelText: 'Check Password ',
           hintText: "ใส่รหัสผ่านอีกครั้ง",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-          )
-          ),
+          )),
       validator: (value) {
         if (value!.isEmpty) {
           return "กรุณาป้อนรหัสผ่าน";
@@ -241,9 +260,10 @@ class _RegisterscreenState extends State<Registerscreen> {
     );
   }
 
-ButtonStyle customButtonStyle() {
+  ButtonStyle customButtonStyle() {
     return ElevatedButton.styleFrom(
-      primary: const Color.fromARGB(255, 96, 122, 167), // Set the button's background color
+      primary: const Color.fromARGB(
+          255, 96, 122, 167), // Set the button's background color
       onPrimary: Colors.white, // Set the button's text color
       textStyle: const TextStyle(fontSize: 18), // Set the text style
       padding: const EdgeInsets.symmetric(
@@ -253,6 +273,4 @@ ButtonStyle customButtonStyle() {
       ),
     );
   }
-
-
 }
