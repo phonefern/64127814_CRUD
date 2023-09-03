@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter_application_1/Screen/register.dart';
 import 'package:flutter_application_1/Screen/welcome.dart';
 import 'package:flutter_application_1/models/Users.dart';
 import 'package:flutter_application_1/models/config.dart';
@@ -19,7 +20,6 @@ class MainApp extends StatelessWidget {
         primaryColor: Colors.black,
         hintColor: Colors.black,
       ),
-      
     );
   }
 }
@@ -35,11 +35,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formkey = GlobalKey<FormState>();
   Users user = Users();
+  bool isChecked = false;
 
   // String email = "";
   // String password = "";
-
-  
 
   Future<void> login(Users user) async {
     var parameter = {"email": "phone@test.com", "password": "123456"};
@@ -47,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // var url = Uri.http("10.116.2.219:3000", "users", parameter);
     var resp = await http.get(url);
     print(resp.body);
-    
+
     List<Users> loginResult = usersFromJson(resp.body);
     if (loginResult.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -59,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return welcome();
+          return const welcome();
         }),
       );
     }
@@ -68,33 +67,110 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login Page",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),),
-        
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(16.0),
-        margin: EdgeInsets.all(10),
-        
-        child: Form(
-          key: _formkey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              emailInputField(),
-              passwordInputField(),
-              SubmitButton(),
-              SizedBox(height: 20),
-              
-            ],
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          const Image(
+            image: AssetImage('assets/images/okay.png'),
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity, // ทำให้ Container ครอบคลุมทั้งความกว้างของหน้าจอ
+              height: 535,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(40, 30, 30, 20),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 50,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      const Text(
+                        'Sign in to continue.',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 20),
+                      emailInputField(),
+                      const SizedBox(height: 20),
+                      passwordInputField(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Remember Me",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Checkbox(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SubmitButton(),
+                      TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                color: Color(0xff4c505b),
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const Registerscreen();
+                              }));
+                            },
+                            style: const ButtonStyle(),
+                            child: const Text(
+                              'Sign Up',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Color(0xff4c505b),
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -103,9 +179,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextFormField(
       initialValue: "phone@test.com",
       decoration: InputDecoration(
+        fillColor: Color.fromARGB(255, 230, 224, 224),
+        filled: true,
           labelText: 'Email',
           hintText: "ใส่อีเมลที่นี่",
-          icon: Icon(Icons.mark_email_read)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+          )
+          ),
       validator: (value) {
         if (value!.isEmpty) {
           return "กรุณาป้อนอีเมล";
@@ -117,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return null;
       },
       // onSaved: (newValue) => email = newValue!,
-       onSaved: (newValue) => user.email = newValue!,
+      onSaved: (newValue) => user.email = newValue!,
     );
   }
 
@@ -125,10 +206,15 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextFormField(
       initialValue: "123456",
       obscureText: true,
-      decoration: InputDecoration(
+      decoration:  InputDecoration(
+        fillColor: Color.fromARGB(255, 230, 224, 224),
+        filled: true,
           labelText: 'Password',
           hintText: "ใส่รหัสผ่านที่นี่",
-          icon: Icon(Icons.password)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+          )
+          ),
       validator: (value) {
         if (value!.isEmpty) {
           return "กรุณาป้อนรหัสผ่าน";
@@ -156,18 +242,20 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       style: customButtonStyle(),
-      child: Text("Login"),
+      child: const Text("Login"),
     );
   }
+
   ButtonStyle customButtonStyle() {
-  return ElevatedButton.styleFrom(
-    primary: Colors.blueAccent, // Set the button's background color
-    onPrimary: Colors.white, // Set the button's text color
-    textStyle: TextStyle(fontSize: 18), // Set the text style
-    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12), // Set padding
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8), // Set button border radius
-    ),
-  );
-}
+    return ElevatedButton.styleFrom(
+      primary: const Color.fromARGB(255, 96, 122, 167), // Set the button's background color
+      onPrimary: Colors.white, // Set the button's text color
+      textStyle: const TextStyle(fontSize: 18), // Set the text style
+      padding: const EdgeInsets.symmetric(
+          horizontal: 80, vertical: 12), // Set padding
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8), // Set button border radius
+      ),
+    );
+  }
 }
