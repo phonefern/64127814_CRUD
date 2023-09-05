@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter_application_1/models/Patients.dart';
-import 'package:flutter_application_1/models/Users.dart';
 import 'package:flutter_application_1/models/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -31,13 +30,13 @@ class __UserFormState extends State<UserForm> {
   }
 
   Future<void> updatePatient(patient) async {
-    var url = Uri.http(Configure.server, "users/${patient.id}");
+    var url = Uri.http(Configure.server, "patient/${patient.id}");
     var resp = await http.put(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(patient.toJson()));
-    var rs = usersFromJson("[${resp.body}]");
+    var rs = patientsFromJson("[${resp.body}]");
     if (rs.length == 1) {
       Navigator.pop(context, "refresh");
     }
