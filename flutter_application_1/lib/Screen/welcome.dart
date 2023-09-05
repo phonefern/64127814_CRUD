@@ -3,6 +3,7 @@ import 'package:flutter_application_1/Screen/UserForm.dart';
 import 'package:flutter_application_1/Screen/UserInfo.dart';
 import 'package:flutter_application_1/Screen/login.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/models/Patients.dart';
 import 'package:flutter_application_1/models/Users.dart';
 import 'package:flutter_application_1/models/config.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +12,6 @@ import 'package:dotted_line/dotted_line.dart';
 class welcome extends StatefulWidget {
   static String routeName = "/";
   const welcome({super.key});
-  
 
   @override
   State<welcome> createState() => _welcomeState();
@@ -19,8 +19,8 @@ class welcome extends StatefulWidget {
 
 class _welcomeState extends State<welcome> {
   Widget mainbody = Container();
-  Future<void> removeUsers(user) async {
-    var url = Uri.http(Configure.server, "users/${user.id}");
+  Future<void> removeUsers(patient) async {
+    var url = Uri.http(Configure.server, "patient/${patient.id}");
     var resp = await http.delete(url);
     print(resp.body);
     return;
@@ -33,7 +33,7 @@ class _welcomeState extends State<welcome> {
     Users user = Configure.login;
     if (user.id != null) {
       // mainbody = showUsers();
-      getUsers();
+      getPatients();
     }
   }
 
@@ -54,7 +54,7 @@ class _welcomeState extends State<welcome> {
               String result = await Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const UserForm()));
               if (result == "refresh") {
-                getUsers();
+                getPatients();
               }
             },
           ),
@@ -65,9 +65,9 @@ class _welcomeState extends State<welcome> {
     );
   }
 
-  Widget showUsers() {
+  Widget showPatients() {
     return ListView.builder(
-      itemCount: _userList.length + 1, // เพิ่ม 1 เพื่อให้มีข้อความด้านบนสุด
+      itemCount: _patientList.length + 1, // เพิ่ม 1 เพื่อให้มีข้อความด้านบนสุด
       itemBuilder: (context, index) {
         if (index == 0) {
           // สร้างข้อความด้านบนสุด
@@ -105,17 +105,21 @@ class _welcomeState extends State<welcome> {
             ),
           );
         }
-        Users user = _userList[index - 1];
+        Patients patient = _patientList[index - 1];
         return Dismissible(
           key: UniqueKey(),
           direction: DismissDirection.endToStart,
           onDismissed: (direction) {
-            removeUsers(user);
+            removeUsers(patient);
           },
           background: Container(
-            color: Colors.red,
-            margin: const EdgeInsets.symmetric(horizontal: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             alignment: Alignment.centerRight,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(
+                  10), // ปรับค่าตรงนี้เพื่อเปลี่ยนความโค้ง
+            ),
             child: const Icon(Icons.delete, color: Colors.white),
           ),
           child: Column(
@@ -134,23 +138,28 @@ class _welcomeState extends State<welcome> {
               // ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    40, 20, 15, 20), // ปรับแต่ง Padding ตามความต้องการ
+                    20, 20, 20, 20), // ปรับแต่ง Padding ตามความต้องการ
                 child: ListTile(
+                  leading: Image.asset(
+                    "assets/images/user.png",
+                    width: 40,
+                    height: 40,
+                  ),
                   title: Text(
-                    '0${user.id}      ${user.fullname}', // เชื่อม id และ fullname ในบรรทัดเดียวกัน
+                    '0${patient.id}  ${patient.fullname}', // เชื่อม id และ fullname ในบรรทัดเดียวกัน
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
-                      fontSize: 17,
+                      fontSize: 15,
                     ),
                   ),
-                  subtitle: Text("HN:     ${user.hn}"),
+                  subtitle: Text("HN:     ${patient.hn}"),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const UserInfo(),
-                        settings: RouteSettings(arguments: user),
+                        settings: RouteSettings(arguments: patient),
                       ),
                     );
                   },
@@ -160,14 +169,14 @@ class _welcomeState extends State<welcome> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const UserForm(),
-                          settings: RouteSettings(arguments: user),
+                          settings: RouteSettings(arguments: patient),
                         ),
                       );
                       if (result == "refresh") {
-                        getUsers();
+                        getPatients();
                       }
                     },
-                    icon: const Icon(Icons.edit),
+                    icon: const Icon(Icons.edit_attributes_sharp),
                   ),
                 ),
               ),
@@ -187,13 +196,13 @@ class _welcomeState extends State<welcome> {
     );
   }
 
-  List<Users> _userList = [];
-  Future<void> getUsers() async {
-    var url = Uri.http(Configure.server, "users");
+  List<Patients> _patientList = [];
+  Future<void> getPatients() async {
+    var url = Uri.http(Configure.server, "patient");
     var resp = await http.get(url);
     setState(() {
-      _userList = usersFromJson(resp.body);
-      mainbody = showUsers();
+      _patientList = patientsFromJson(resp.body);
+      mainbody = showPatients();
     });
     return;
   }

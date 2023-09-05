@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/Users.dart';
+import 'package:flutter_application_1/models/Patients.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({super.key});
 
   @override
 Widget build(BuildContext context) {
-  Users user = ModalRoute.of(context)!.settings.arguments as Users;
+  Patients patient = ModalRoute.of(context)!.settings.arguments as Patients;
   return Scaffold(
     appBar: AppBar(
       title: const Text("User Info"),
@@ -17,9 +17,9 @@ Widget build(BuildContext context) {
         child: ListView(
           children: [
             ListTile(
-              title: const Text("Name"),
+              title: const Text("ชื่อ - สกุล"),
               subtitle: Text(
-                ("${user.fullname}"),
+                ("${patient.fullname}"),
                 style: const TextStyle(
                   color: Colors.black, // สีข้อความ
                   fontSize: 16, // ขนาดตัวอักษร
@@ -27,9 +27,9 @@ Widget build(BuildContext context) {
               ),
             ),
             ListTile(
-              title: const Text("Email"),
+              title: const Text("HN"),
               subtitle: Text(
-                ("${user.email}"),
+                ("${patient.hn}"),
                 style: const TextStyle(
                   color: Colors.black, // สีข้อความ
                   fontSize: 16, // ขนาดตัวอักษร
@@ -37,9 +37,9 @@ Widget build(BuildContext context) {
               ),
             ),
             ListTile(
-              title: const Text("Gender"),
+              title: const Text("เพศ"),
               subtitle: Text(
-                ("${user.gender}"),
+                ("${patient.gender}"),
                 style: const TextStyle(
                   color: Colors.black, // สีข้อความ
                   fontSize: 16, // ขนาดตัวอักษร

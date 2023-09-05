@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextFormField(
       initialValue: "phone@test.com",
       decoration: InputDecoration(
-        fillColor: Color.fromARGB(255, 230, 224, 224),
+        fillColor: const Color.fromARGB(255, 230, 224, 224),
         filled: true,
           labelText: 'Email',
           hintText: "ใส่อีเมลที่นี่",
@@ -207,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
       initialValue: "123456",
       obscureText: true,
       decoration:  InputDecoration(
-        fillColor: Color.fromARGB(255, 230, 224, 224),
+        fillColor: const Color.fromARGB(255, 230, 224, 224),
         filled: true,
           labelText: 'Password',
           hintText: "ใส่รหัสผ่านที่นี่",
@@ -248,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   ButtonStyle customButtonStyle() {
     return ElevatedButton.styleFrom(
-      primary: const Color.fromARGB(255, 96, 122, 167), // Set the button's background color
+      primary: const Color.fromARGB(255, 53, 140, 197),  // Set the button's background color
       onPrimary: Colors.white, // Set the button's text color
       textStyle: const TextStyle(fontSize: 18), // Set the text style
       padding: const EdgeInsets.symmetric(

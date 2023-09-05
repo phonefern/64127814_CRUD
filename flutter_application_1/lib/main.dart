@@ -29,14 +29,21 @@ class _startState extends State<start> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:Container(
-        color:Colors.white,
+        width: double
+                .infinity, // ทำให้ Container ครอบคลุมทั้งความกว้างของหน้าจอ
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+            ),
        child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 150, 20, 30),
         child: SingleChildScrollView(
           child: Column(children: [
             const SizedBox(height: 70),
-            Image.asset('assets/images/logo.png'),
-            const SizedBox(height: 70),
+            Image.asset('assets/images/logo.png',
+             width: 300, // Set the desired width
+                        height: 120,),
+            const SizedBox(height: 120),
             const Text(
               'Patient information system',
               style: TextStyle(
@@ -77,8 +84,7 @@ class _startState extends State<start> {
 
   ButtonStyle customButtonStyle() {
     return ElevatedButton.styleFrom(
-      primary: const Color.fromARGB(
-          255, 96, 122, 167), // Set the button's background color
+      primary: Color.fromARGB(255, 53, 140, 197), // Set the button's background color
       onPrimary: Colors.white, // Set the button's text color
       textStyle: const TextStyle(fontSize: 18), // Set the text style
       padding: const EdgeInsets.symmetric(
