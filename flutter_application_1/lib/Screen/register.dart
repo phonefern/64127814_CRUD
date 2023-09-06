@@ -67,7 +67,7 @@ class _RegisterscreenState extends State<Registerscreen> {
               child: Container(
                   width: double
                       .infinity, // ทำให้ Container ครอบคลุมทั้งความกว้างของหน้าจอ
-                  height: 700,
+                  height: 725,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -87,7 +87,7 @@ class _RegisterscreenState extends State<Registerscreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                      padding: const EdgeInsets.fromLTRB(30, 60, 30, 80),
                       child: Form(
                           key: _formkey,
                           child: Column(

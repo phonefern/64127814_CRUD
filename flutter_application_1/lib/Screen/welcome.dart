@@ -125,17 +125,6 @@ class _welcomeState extends State<welcome> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(45, 10, 1, 10),
-              //   child: Text(
-              //     '${user.id}',
-              //     style: const TextStyle(
-              //       fontWeight: FontWeight.w900,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 15,
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
                     20, 20, 20, 20), // ปรับแต่ง Padding ตามความต้องการ

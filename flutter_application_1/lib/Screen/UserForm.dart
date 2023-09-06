@@ -15,7 +15,7 @@ class __UserFormState extends State<UserForm> {
   final _formkey = GlobalKey<FormState>();
   late Patients patient;
 
-  Future<void> addNewPatient(patient) async {
+  Future<void>addNewPatient(patient) async {
     var url = Uri.http(Configure.server, "patient");
     var resp = await http.post(url,
         headers: <String, String>{
