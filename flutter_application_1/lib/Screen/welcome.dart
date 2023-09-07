@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Screen/UserForm.dart';
 import 'package:flutter_application_1/Screen/UserInfo.dart';
@@ -6,8 +8,10 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/models/Patients.dart';
 import 'package:flutter_application_1/models/Users.dart';
 import 'package:flutter_application_1/models/config.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:dotted_line/dotted_line.dart';
+
 
 class welcome extends StatefulWidget {
   static String routeName = "/";
@@ -28,9 +32,9 @@ class _welcomeState extends State<welcome> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Users user = Configure.login;
+     shuffledImageUrls = List.from(imageUrls)..shuffle();
     if (user.id != null) {
       // mainbody = showUsers();
       getPatients();
@@ -42,9 +46,11 @@ class _welcomeState extends State<welcome> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 71, 177, 238),
-        title: const Text("Patient",
-            style: TextStyle(
-                fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold),
+        title:  Text("Patient",
+            style: GoogleFonts.poppins(
+                fontSize: 25,
+                 color: Colors.black,
+                  fontWeight: FontWeight.bold),
             textAlign: TextAlign.center), // ข้อความอยู่ตรงกลาง
         centerTitle: true,
         actions: <Widget>[
@@ -63,6 +69,27 @@ class _welcomeState extends State<welcome> {
       drawer: const Sidemenu(),
       body: mainbody,
     );
+  }
+// สร้างรายการ URL ของรูปภาพที่จะใช้
+List<String> imageUrls = [
+  "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
+  "https://cdn.pixabay.com/photo/2015/01/27/09/58/man-613601_1280.jpg",
+  "https://media.istockphoto.com/id/1289220545/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AB%E0%B8%8D%E0%B8%B4%E0%B8%87%E0%B8%AA%E0%B8%A7%E0%B8%A2%E0%B8%A2%E0%B8%B4%E0%B9%89%E0%B8%A1%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B9%81%E0%B8%82%E0%B8%99%E0%B9%84%E0%B8%82%E0%B8%A7%E0%B9%89.jpg?s=2048x2048&w=is&k=20&c=KDZk-QigVeHP72lsXf3ITsMPwoFoJojVAOECB0WG2yQ=",
+  "https://media.istockphoto.com/id/1408041355/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%98%E0%B8%B8%E0%B8%A3%E0%B8%81%E0%B8%B4%E0%B8%88%E0%B8%AB%E0%B8%8D%E0%B8%B4%E0%B8%87%E0%B8%9C%E0%B8%B4%E0%B8%A7%E0%B8%94%E0%B9%8D%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%97%E0%B9%82%E0%B8%9F%E0%B8%99%E0%B9%83%E0%B8%99%E0%B8%AA%E0%B9%8D%E0%B8%B2%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%A3%E0%B8%A3%E0%B8%84%E0%B9%8C.jpg?s=612x612&w=0&k=20&c=fOrI3yR9r6WNVWQCtsWqcJ-2YWENddVoDM3ZJWirqPg=",
+  "https://media.istockphoto.com/id/1389465862/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%98%E0%B8%B8%E0%B8%A3%E0%B8%81%E0%B8%B4%E0%B8%88%E0%B8%AB%E0%B8%99%E0%B8%B8%E0%B9%88%E0%B8%A1%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%97%E0%B9%8D%E0%B8%B2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9A%E0%B8%99%E0%B9%81%E0%B8%A5%E0%B9%87%E0%B8%9B%E0%B8%97%E0%B9%87%E0%B8%AD%E0%B8%9B%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%82%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%82%E0%B8%95%E0%B9%8A%E0%B8%B0%E0%B8%97%E0%B9%8D%E0%B8%B2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%82%E0%B8%B2.jpg?s=612x612&w=0&k=20&c=Sl7-RpkuOBa6K-bMXixW2NwSPVlVTECsQNthzihvfhM=",
+  "https://media.istockphoto.com/id/1296344118/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AB%E0%B8%8D%E0%B8%B4%E0%B8%87%E0%B8%A1%E0%B8%B5%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AA%E0%B8%A7%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%9E%E0%B8%A5%E0%B8%B4%E0%B8%94%E0%B9%80%E0%B8%9E%E0%B8%A5%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B9%81%E0%B8%AA%E0%B8%87%E0%B9%81%E0%B8%94%E0%B8%94%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AD%E0%B8%9A%E0%B8%AD%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B9%83%E0%B8%99%E0%B8%AA%E0%B8%A7%E0%B8%99%E0%B8%AA%E0%B8%B2%E0%B8%98%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B8%B0%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%99.jpg?s=612x612&w=0&k=20&c=KNUg6dOM0CFPwEML51Mb65qxI0cLbZjh3eN9LHPcB9I=",
+  "https://media.istockphoto.com/id/1301592466/th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%B2%E0%B8%A2%E0%B9%81%E0%B8%AD%E0%B8%9F%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%9A%E0%B8%A7%E0%B8%81%E0%B8%95%E0%B8%B0%E0%B9%82%E0%B8%81%E0%B8%99%E0%B9%83%E0%B8%99%E0%B9%82%E0%B8%97%E0%B8%A3%E0%B9%82%E0%B8%82%E0%B9%88%E0%B8%87%E0%B8%A1%E0%B8%B2%E0%B8%81%E0%B8%81%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B5%E0%B9%80%E0%B8%97%E0%B8%B2.jpg?s=612x612&w=0&k=20&c=Gj-r5-DefpbIpYmB9pMDphLO4B1uZ75d5bEN-qhP4yM=",
+  // เพิ่ม URL อื่น ๆ ตามต้องการ
+];
+
+List<String> shuffledImageUrls = [];
+
+String getNextImageUrl() {
+    if (shuffledImageUrls.isEmpty) {
+      // สุ่มรายการใหม่เมื่อครบทุกรูปภาพ
+      shuffledImageUrls = List.from(imageUrls)..shuffle();
+    }
+    return shuffledImageUrls.removeLast();
   }
 
   Widget showPatients() {
@@ -127,19 +154,18 @@ class _welcomeState extends State<welcome> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    20, 20, 20, 20), // ปรับแต่ง Padding ตามความต้องการ
+                    20, 25, 20, 20), // ปรับแต่ง Padding ตามความต้องการ
                 child: ListTile(
-                  leading: Image.asset(
-                    "assets/images/user.png",
-                    width: 40,
-                    height: 40,
+                  leading: CircleAvatar(
+                    radius: 30, // ขนาดของวงกลม
+                   backgroundImage: NetworkImage(getNextImageUrl()),
                   ),
                   title: Text(
                     '0${patient.id}  ${patient.fullname}', // เชื่อม id และ fullname ในบรรทัดเดียวกัน
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 15,
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black
                     ),
                   ),
                   subtitle: Text("HN:     ${patient.hn}"),
@@ -165,7 +191,7 @@ class _welcomeState extends State<welcome> {
                         getPatients();
                       }
                     },
-                    icon: const Icon(Icons.edit_attributes_sharp),
+                    icon: const Icon(Icons.edit),
                   ),
                 ),
               ),
