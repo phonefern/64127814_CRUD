@@ -67,6 +67,7 @@ class __UserInfoState extends State<UserInfo> {
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
+                            color: Colors.black54
                           ),
                         ),
                         const SizedBox(height: 10.0),
@@ -78,6 +79,7 @@ class __UserInfoState extends State<UserInfo> {
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
+                            color: Colors.black54
                           ),
                         ),
                         const SizedBox(
@@ -99,6 +101,7 @@ class __UserInfoState extends State<UserInfo> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                       fontSize: 15,
+                                      color: Colors.black54
                                     ),
                                   ),
                                   const SizedBox(
@@ -121,6 +124,7 @@ class __UserInfoState extends State<UserInfo> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                       fontSize: 15,
+                                      color: Colors.black54
                                     ),
                                   ),
                                   const SizedBox(
@@ -139,6 +143,7 @@ class __UserInfoState extends State<UserInfo> {
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
+                            color: Colors.black54
                           ),
                         ),
                         const SizedBox(height: 10.0),
@@ -150,6 +155,7 @@ class __UserInfoState extends State<UserInfo> {
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
+                            color: Colors.black54
                           ),
                         ),
                         const SizedBox(height: 10.0),
@@ -265,4 +271,3 @@ class __UserInfoState extends State<UserInfo> {
         ));
   }
   }
-
